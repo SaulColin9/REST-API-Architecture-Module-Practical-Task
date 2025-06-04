@@ -1,4 +1,4 @@
-package org.cloud.repository;
+package org.cloud.repository.subscription;
 
 import org.domain.Subscription;
 

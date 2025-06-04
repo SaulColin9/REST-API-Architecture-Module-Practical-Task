@@ -1,12 +1,14 @@
-package org.cloud.repository;
+package org.cloud.repository.subscription;
 
 import org.domain.Subscription;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Repository
 public class DefaultSubscriptionRepository implements SubscriptionRepository{
 
     final Map<Long, Subscription> storage;

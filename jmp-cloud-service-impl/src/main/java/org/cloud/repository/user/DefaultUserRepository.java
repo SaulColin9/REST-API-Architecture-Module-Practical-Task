@@ -1,4 +1,4 @@
-package org.cloud.repository;
+package org.cloud.repository.user;
 
 import org.domain.User;
 import org.springframework.stereotype.Repository;

@@ -1,10 +1,8 @@
-package org.cloud.repository;
+package org.cloud.repository.user;
 
 import org.domain.User;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 public interface UserRepository {
     User get(Long id);

@@ -2,7 +2,7 @@ package org.cloud.service;
 
 import org.cloud.converter.UserRequestDtoToUserConverter;
 import org.cloud.converter.UserToUserResponseDtoConverter;
-import org.cloud.repository.UserRepository;
+import org.cloud.repository.user.UserRepository;
 import org.domain.User;
 import org.dto.UserRequestDto;
 import org.dto.UserResponseDto;

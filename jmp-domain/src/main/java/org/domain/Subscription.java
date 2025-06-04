@@ -1,9 +1,17 @@
 package org.domain;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
+@Entity(name="subscriptions")
 public class Subscription {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
     private LocalDate startDate;
 
