@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-//import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/subscription")
-@Tag(name = "Subscription API", description = "CRUD API for subcriptions")
+@Tag(name = "Subscription API", description = "CRUD API for subscriptions")
 public class SubscriptionControllerImpl implements SubscriptionController {
     @Autowired
     private SubscriptionService subscriptionService;
@@ -29,7 +29,7 @@ public class SubscriptionControllerImpl implements SubscriptionController {
     @Operation(summary = "Create a new subscription", description = "Adds a new subscription to storage")
     public SubscriptionResponseDto createSubscription(@RequestBody SubscriptionRequestDto dto) {
         SubscriptionResponseDto responseDto = subscriptionService.createSubscription(dto);
-//        responseDto.add(linkTo(methodOn(SubscriptionControllerImpl.class).getSubscription(responseDto.getId())).withSelfRel());
+        responseDto.add(linkTo(methodOn(SubscriptionControllerImpl.class).getSubscription(responseDto.getId())).withSelfRel());
         return responseDto;
     }
 
@@ -38,8 +38,9 @@ public class SubscriptionControllerImpl implements SubscriptionController {
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Update subscription", description = "Updates an existing subscription")
     public SubscriptionResponseDto updateSubscription(@RequestBody SubscriptionRequestDto dto) {
-        return subscriptionService.updateSubscription(dto);
-    }
+        SubscriptionResponseDto responseDto = subscriptionService.createSubscription(dto);
+        responseDto.add(linkTo(methodOn(SubscriptionControllerImpl.class).getSubscription(responseDto.getId())).withSelfRel());
+        return responseDto;    }
 
     @Override
     @DeleteMapping("/{id}")
@@ -54,7 +55,11 @@ public class SubscriptionControllerImpl implements SubscriptionController {
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Get subscription", description = "Retrieves an existing subscription")
     public SubscriptionResponseDto getSubscription(@PathVariable Long id) {
-        return subscriptionService.getSubscription(id);
+        SubscriptionResponseDto responseDto = subscriptionService.getSubscription(id);
+        responseDto.add(
+                linkTo(methodOn(SubscriptionControllerImpl.class).getSubscription(id)).withSelfRel(),
+                linkTo(methodOn(SubscriptionControllerImpl.class).getAllSubscription()).withRel("all-subscriptions"));
+        return responseDto;
     }
 
     @Override

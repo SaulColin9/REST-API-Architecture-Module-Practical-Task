@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @RestController
 @RequestMapping("/users")
 @Tag(name = "User API", description = "CRUD API for users")
@@ -24,7 +27,9 @@ public class UserControllerImpl implements UserController {
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new user", description = "Adds a new user to storage")
     public UserResponseDto createUser(@RequestBody UserRequestDto dto) {
-        return userService.createUser(dto);
+        UserResponseDto responseDto =  userService.createUser(dto);
+        responseDto.add(linkTo(methodOn(UserControllerImpl.class).getUser(responseDto.getId())).withSelfRel());
+        return responseDto;
     }
 
     @Override
@@ -32,7 +37,9 @@ public class UserControllerImpl implements UserController {
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Updates user", description = "Updates an existing user")
     public UserResponseDto updateUser(@RequestBody UserRequestDto dto) {
-        return userService.updateUser(dto);
+        UserResponseDto responseDto =  userService.createUser(dto);
+        responseDto.add(linkTo(methodOn(UserControllerImpl.class).getUser(responseDto.getId())).withSelfRel());
+        return responseDto;
     }
 
     @Override
@@ -48,7 +55,11 @@ public class UserControllerImpl implements UserController {
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Get user", description = "Retrieves an existing user")
     public UserResponseDto getUser(@PathVariable Long id) {
-        return userService.getUser(id);
+        UserResponseDto responseDto =  userService.getUser(id);
+        responseDto.add(
+                linkTo(methodOn(UserControllerImpl.class).getUser(id)).withSelfRel(),
+                linkTo(methodOn(UserControllerImpl.class).getAllUser()).withRel("all-users"));
+        return responseDto;
     }
 
     @Override

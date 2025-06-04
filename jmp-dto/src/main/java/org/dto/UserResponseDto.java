@@ -1,8 +1,8 @@
 package org.dto;
 
-//import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.RepresentationModel;
 
-public class UserResponseDto {
+public class UserResponseDto extends RepresentationModel<UserResponseDto>{
     private Long id;
     private String name;
     private String surname;
