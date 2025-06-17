@@ -2,12 +2,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.domain</groupId>
-  <artifactId>jmp-domain</artifactId>
+  <groupId>org.api</groupId>
+  <artifactId>jmp-service-api</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>jmp-domain</name>
+  <name>jmp-service-api</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -16,15 +16,20 @@
 
   <dependencies>
     <dependency>
-      <groupId>jakarta.persistence</groupId>
-      <artifactId>jakarta.persistence-api</artifactId>
-      <version>3.2.0</version>
-    </dependency>
-    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.rest</groupId>
+      <artifactId>jmp-service-rest</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.domain</groupId>
+      <artifactId>jmp-domain</artifactId>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
 </project>
